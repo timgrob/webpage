@@ -10,7 +10,7 @@ const TYPE_INTERVAL_MS = 15;
 const HELP_TEXT = "Available commands: whoami, help";
 
 const WHOAMI_TEXT =
-  "Tim Grob — quant developer and researcher with an Oxford PhD in physics. By day: pricing risk and building trading systems. By night: wiring up Arduinos until something blinks the way it's supposed to.";
+  "Tim Grob — quant developer and researcher with a PhD from Oxford. By day: pricing risk and building trading systems. By night: wiring up Arduinos until something blinks the way it's supposed to.";
 
 type HistoryEntry = {
   id: number;

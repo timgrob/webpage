@@ -19,7 +19,7 @@ describe("Terminal", () => {
     expect(
       screen.getByText(/quant developer and researcher/i),
     ).toBeInTheDocument();
-    expect(screen.getByText(/Oxford PhD/i)).toBeInTheDocument();
+    expect(screen.getByText(/PhD from Oxford/i)).toBeInTheDocument();
   });
 
   it("responds to help by listing the available commands", async () => {
