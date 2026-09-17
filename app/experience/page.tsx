@@ -2,7 +2,7 @@ import { EXPERIENCE_CONTENT } from "@/lib/experience-content";
 
 export default function ExperiencePage() {
   return (
-    <main className="mx-auto flex max-w-3xl flex-1 flex-col px-6 py-16">
+    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-6 py-16">
       <p className="text-accent">$ cat experience.md</p>
 
       <p className="mt-4 max-w-xl text-muted">{EXPERIENCE_CONTENT.summary}</p>

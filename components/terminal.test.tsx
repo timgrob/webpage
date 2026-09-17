@@ -40,4 +40,22 @@ describe("Terminal", () => {
     const { input } = await runCommand("whoami");
     expect(input).toHaveValue("");
   });
+
+  it("keeps a fixed-height, scrollable output area regardless of how many commands are run", async () => {
+    const user = userEvent.setup();
+    render(<Terminal />);
+    const input = screen.getByRole("textbox", { name: /terminal command/i });
+    const scrollArea = screen.getByRole("list").parentElement;
+
+    expect(scrollArea?.className).toMatch(/\bh-56\b/);
+    expect(scrollArea?.className).toMatch(/overflow-y-auto/);
+
+    for (const command of ["whoami", "help", "whoami", "help", "whoami"]) {
+      await user.type(input, `${command}{enter}`);
+    }
+
+    // Same element, same fixed-height class — the widget doesn't grow with history.
+    expect(screen.getByRole("list").parentElement).toBe(scrollArea);
+    expect(scrollArea?.className).toMatch(/\bh-56\b/);
+  });
 });

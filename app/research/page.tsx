@@ -2,7 +2,7 @@ import { RESEARCH_CONTENT } from "@/lib/research-content";
 
 export default function ResearchPage() {
   return (
-    <main className="mx-auto flex max-w-3xl flex-1 flex-col px-6 py-16">
+    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-6 py-16">
       <p className="text-accent">$ cat research.md</p>
 
       <h1 className="mt-4 text-lg font-semibold">{RESEARCH_CONTENT.title}</h1>

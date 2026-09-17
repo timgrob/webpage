@@ -2,7 +2,7 @@ import { CODE_CONTENT } from "@/lib/code-content";
 
 export default function CodePage() {
   return (
-    <main className="mx-auto flex max-w-3xl flex-1 flex-col px-6 py-16">
+    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-6 py-16">
       <p className="text-accent">$ cat code.md</p>
 
       <p className="mt-4 max-w-xl text-muted">{CODE_CONTENT.description}</p>
