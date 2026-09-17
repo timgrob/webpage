@@ -28,4 +28,11 @@ describe("Home page", () => {
     ).not.toBeInTheDocument();
     expect(screen.queryByText(/\+41/)).not.toBeInTheDocument();
   });
+
+  it("renders the interactive terminal widget", () => {
+    render(<Home />);
+    expect(
+      screen.getByRole("textbox", { name: /terminal command/i }),
+    ).toBeInTheDocument();
+  });
 });
