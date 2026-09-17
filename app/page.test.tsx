@@ -1,0 +1,31 @@
+import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
+import Home from "./page";
+import { HOME_CONTENT } from "@/lib/home-content";
+
+describe("Home page", () => {
+  it("renders the headline identity", () => {
+    render(<Home />);
+    expect(screen.getByText(HOME_CONTENT.identity)).toBeInTheDocument();
+  });
+
+  it("renders an interests blurb mentioning running, tennis, and climbing", () => {
+    render(<Home />);
+    expect(screen.getByText(/running/i)).toBeInTheDocument();
+    expect(screen.getByText(/tennis/i)).toBeInTheDocument();
+    expect(screen.getByText(/climbing/i)).toBeInTheDocument();
+  });
+
+  it("does not mention crypto trading (already covered under Experience, not Interests)", () => {
+    render(<Home />);
+    expect(screen.queryByText(/crypto/i)).not.toBeInTheDocument();
+  });
+
+  it("never renders personal contact details", () => {
+    render(<Home />);
+    expect(
+      screen.queryByText(/grob\.tim@gmail\.com/i),
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText(/\+41/)).not.toBeInTheDocument();
+  });
+});
