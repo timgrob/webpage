@@ -35,6 +35,8 @@ Rebuild the site from scratch as a Next.js app deployed on Vercel, replacing the
 23. As a developer maintaining this site later, I want Experience/Research/Projects/Code content represented as structured content data rather than hardcoded markup, so that updating content doesn't require touching page layout code.
 24. As a developer testing this site, I want page-level tests asserting that no personal contact info ever appears in rendered output, so that a future content edit can't accidentally reintroduce a home address, phone number, or personal email.
 25. As any visitor, I want each of the four Arduino projects (self-balancing robot, LCD display, DC motor, 7-segment display) to have its own distinct entry, so that the Projects section doesn't lump them into one generic gallery.
+26. As a visitor on the homepage, I want to see a terminal-style animation type out an introduction, so that the "nerdy" aesthetic is reinforced the moment the page loads.
+27. As a visitor on the homepage, I want to type `whoami` into that terminal and get a fun, real answer, so that the terminal feels like a genuine easter egg rather than just decoration.
 
 ## Implementation Decisions
 
@@ -43,6 +45,7 @@ Rebuild the site from scratch as a Next.js app deployed on Vercel, replacing the
 - **Navigation**: routed pages (not a single scrolling page) with a persistent nav bar: Home, Experience, Research, Projects, Code, Contact.
 - **Content modeling**: Experience, Research, Projects, and Code entries are represented as structured content data consumed by page components, kept separate from presentation/layout.
 - **Experience**: web-native narrative synthesized from Tim's general "Quant" CV (not the role-tailored "Quant Analyst"/"Quant Developer"/"Quant Researcher" variants). A single downloadable CV PDF is offered, matching the on-site narrative. No home address, phone number, or personal email is displayed anywhere on the site.
+- **Homepage terminal**: primarily decorative — a terminal-style widget that auto-types an introduction on load — but with light interactivity layered on top, not a full CLI. It accepts a small, fixed set of commands (at minimum `whoami`, returning a short, fun identity blurb; `help`, listing the available commands) rather than simulating a real shell or mapping to site navigation (`cd`/`ls` into real pages is explicitly out of scope — see below). Lives only on the Home page, alongside the real persistent nav, not as a replacement for it or a global overlay.
 - **Research**: a dedicated page for Tim's PhD topic (Numerical Particle Trajectory Simulation, University of Oxford, 2012–2016), written for a smart general reader, linking out to his three peer-reviewed papers by DOI:
   - `https://doi.org/10.1016/j.jmmm.2017.12.007`
   - `https://doi.org/10.1016/j.jmmm.2015.02.031`
@@ -62,7 +65,8 @@ Rebuild the site from scratch as a Next.js app deployed on Vercel, replacing the
   1. Content correctness — each page renders the expected content (Experience entries, the Research topic plus all three DOI links, all four Projects with their video links, Code entries with GitHub links) given its content data.
   2. Absence of personal info — no test run should ever find a home address, phone number, or personal email string anywhere in rendered output, across all pages.
   3. Contact form behavior — filling and submitting the form triggers the outbound relay call with the correct payload, with the network call mocked at the `fetch` boundary; invalid input is rejected client-side without a network call firing.
-- **What's NOT tested**: the actual behavior of the third-party relay service (Formspree/Resend/etc.) — mocked at the boundary, not exercised for real. Pixel-level/visual appearance of the terminal aesthetic is not asserted on by these tests.
+  4. Homepage terminal behavior — typing `whoami` and submitting produces the expected response text; typing an unrecognized command doesn't crash the widget or the page.
+- **What's NOT tested**: the actual behavior of the third-party relay service (Formspree/Resend/etc.) — mocked at the boundary, not exercised for real. Pixel-level/visual appearance of the terminal aesthetic, and the exact timing/animation of the auto-typing intro, are not asserted on by these tests.
 - **Prior art**: none — this repo is greenfield. This is the first test suite and establishes the pattern (render + assert via RTL, network calls mocked) that later pages should follow.
 
 ## Out of Scope
@@ -75,6 +79,8 @@ Rebuild the site from scratch as a Next.js app deployed on Vercel, replacing the
 - Sourcing/confirming the exact YouTube video URL per Arduino project — deferred to implementation, with the channel link as fallback.
 - DNS/domain cutover from the current WordPress hosting to Vercel — an infrastructure/ops task, out of scope for this spec.
 - Any use of the other three tailored CV PDF variants (Quant Analyst, Quant Developer, Quant Researcher) — irrelevant here; this spec only uses the general "Quant" variant.
+- Using the homepage terminal as a real navigation mechanism (e.g. `cd research`, `ls projects` moving between pages) — it's a fun, mostly-decorative easter egg with a couple of commands, not an alternate site interface.
+- A global command-palette-style terminal accessible from every page — this stays a Home-page-only feature.
 
 ## Further Notes
 
