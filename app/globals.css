@@ -7,6 +7,8 @@
   --accent: #4ade80;
   --border: #27272a;
   --error: #f87171;
+  --terminal-bg: #000000;
+  --terminal-chrome: #18181b;
 }
 
 @theme inline {
@@ -16,6 +18,8 @@
   --color-accent: var(--accent);
   --color-border: var(--border);
   --color-error: var(--error);
+  --color-terminal-bg: var(--terminal-bg);
+  --color-terminal-chrome: var(--terminal-chrome);
   --font-mono: var(--font-jetbrains-mono);
 }
 

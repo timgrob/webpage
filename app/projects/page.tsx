@@ -2,7 +2,7 @@ import { PROJECTS_CONTENT } from "@/lib/projects-content";
 
 export default function ProjectsPage() {
   return (
-    <main className="mx-auto flex max-w-3xl flex-1 flex-col px-6 py-16">
+    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-6 py-16">
       <p className="text-accent">$ cat projects.md</p>
 
       <p className="mt-4 max-w-xl text-muted">{PROJECTS_CONTENT.description}</p>

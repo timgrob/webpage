@@ -36,6 +36,7 @@ export function Terminal() {
   const [input, setInput] = useState("");
   const [history, setHistory] = useState<HistoryEntry[]>([]);
   const nextId = useRef(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let index = 0;
@@ -49,6 +50,12 @@ export function Terminal() {
 
     return () => window.clearInterval(intervalId);
   }, []);
+
+  // Keep the scrollable output pinned to the latest line, like a real terminal.
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
+  }, [history, typedIntro]);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -66,47 +73,63 @@ export function Terminal() {
   }
 
   return (
-    <div className="max-w-xl rounded border border-border p-4 text-sm">
-      {/* The animated reveal is purely decorative; screen readers get the full text immediately below. */}
-      <p aria-hidden="true" className="min-h-[1.5em] text-accent">
-        {typedIntro}
-        <span aria-hidden="true" className="animate-pulse">
-          _
-        </span>
-      </p>
-      <p className="sr-only">{INTRO_TEXT}</p>
-
-      <ul
-        aria-live="polite"
-        className={history.length > 0 ? "mt-4 flex flex-col gap-3" : undefined}
+    <div className="w-full max-w-xl overflow-hidden rounded-lg border border-border shadow-lg">
+      {/* Window chrome: purely decorative, hidden from screen readers. */}
+      <div
+        aria-hidden="true"
+        className="flex items-center gap-2 border-b border-border bg-terminal-chrome px-4 py-2"
       >
-        {history.map((entry) => (
-          <li key={entry.id}>
-            <p className="text-accent">$ {entry.command}</p>
-            <p className="whitespace-pre-wrap text-muted">{entry.response}</p>
-          </li>
-        ))}
-      </ul>
+        <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
+        <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
+        <span className="h-3 w-3 rounded-full bg-[#27c93f]" />
+        <span className="ml-2 text-xs text-muted">tim@timgrob:~</span>
+      </div>
 
-      <form
-        onSubmit={handleSubmit}
-        className="mt-4 flex items-center gap-2 border-t border-border pt-4"
-      >
-        <label htmlFor="terminal-command" className="text-accent">
-          $
-        </label>
-        <input
-          id="terminal-command"
-          name="terminal-command"
-          type="text"
-          autoComplete="off"
-          spellCheck={false}
-          aria-label="terminal command"
-          value={input}
-          onChange={(event) => setInput(event.target.value)}
-          className="flex-1 border-b border-transparent bg-transparent text-foreground focus:border-accent focus:outline-none"
-        />
-      </form>
+      <div className="flex flex-col bg-terminal-bg p-4 text-sm">
+        {/* Fixed-height, scrollable output — the widget never grows with more commands. */}
+        <div ref={scrollRef} className="h-56 overflow-y-auto">
+          {/* The animated reveal is purely decorative; screen readers get the full text immediately below. */}
+          <p aria-hidden="true" className="min-h-[1.5em] text-accent">
+            {typedIntro}
+            <span aria-hidden="true" className="animate-pulse">
+              _
+            </span>
+          </p>
+          <p className="sr-only">{INTRO_TEXT}</p>
+
+          <ul
+            aria-live="polite"
+            className={history.length > 0 ? "mt-4 flex flex-col gap-3" : undefined}
+          >
+            {history.map((entry) => (
+              <li key={entry.id}>
+                <p className="text-accent">$ {entry.command}</p>
+                <p className="whitespace-pre-wrap text-muted">{entry.response}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <form
+          onSubmit={handleSubmit}
+          className="mt-3 flex shrink-0 items-center gap-2 border-t border-border pt-3"
+        >
+          <label htmlFor="terminal-command" className="text-accent">
+            $
+          </label>
+          <input
+            id="terminal-command"
+            name="terminal-command"
+            type="text"
+            autoComplete="off"
+            spellCheck={false}
+            aria-label="terminal command"
+            value={input}
+            onChange={(event) => setInput(event.target.value)}
+            className="flex-1 border-b border-transparent bg-transparent text-foreground focus:border-accent focus:outline-none"
+          />
+        </form>
+      </div>
     </div>
   );
 }
