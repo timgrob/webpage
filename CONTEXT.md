@@ -13,17 +13,19 @@ Tim's personal Arduino/Raspberry Pi hardware builds (e.g. self-balancing robot, 
 _Avoid_: Software projects, side projects (his professional/quant work is not a "Project" in this site's vocabulary)
 
 **Experience**:
-Tim's professional career history — a decade-plus of quantitative development/research roles (SwissQuant, PwC, SIX Group, Mathrix, Digital Wave Finance, Dialectic, XO Market). Rendered on-site as a web-native narrative, synthesized from his general "Quant" CV rather than any of his role-tailored PDF variants.
+Tim's professional career history — a decade-plus of quantitative development roles (SwissQuant, PwC, SIX Group, Mathrix, Digital Wave Finance, plus freelance work at Crypton Holdings). Rendered on-site as a web-native narrative, synthesized from his "Quant Developer" tailored CV. Includes the Crypton Holdings freelance work even though that CV lists it under its own "PROJECTS" heading — that's the CV's own document structure, not this site's vocabulary; freelance paid quant work is "Experience" here, never "Projects" (reserved for the Arduino builds).
 _Avoid_: CV, resume, work history
 
-**CV**:
-The single downloadable PDF document offered on the site, synthesized/general (not one of Tim's role-tailored variants like "Quant Analyst" or "Quant Developer"). Distinct from "Experience," the on-site rendering of the same underlying career history.
-_Avoid_: Resume (use CV, matches Tim's own file naming and European convention)
+No downloadable CV is offered on the site — Tim asked for the download button to be removed, and the underlying PDF was deleted rather than left orphaned.
 
 **Code**:
 A lightweight section surfacing Tim's public GitHub side-projects (e.g. a Freqtrade-based crypto trading bot, sudoku solvers) that don't qualify as "Projects" (not Arduino/hardware) or "Experience" (not paid professional work).
 _Avoid_: Open source, side projects, projects (reserved for the Arduino builds)
 
 **Interests**:
-A short personal/outside-of-work blurb: competitive middle-distance running (Swiss Championships, 800m/1500m), tennis, climbing. Excludes volatility-based crypto trading despite appearing under "Interests" on Tim's CV — that content is already covered by "Experience" (his market-making roles at Mathrix/XO Market) and would duplicate it here.
+A short personal/outside-of-work blurb: competitive middle-distance running (Swiss Championships, 800m/1500m), tennis, climbing. Excludes volatility-based crypto trading despite appearing under "Interests" on Tim's CV — that content is already covered by "Experience" (his market-making and crypto-trading roles) and would duplicate it here. Lives on the Home page alongside "Skills," not on Experience.
 _Avoid_: About, hobbies
+
+**Thesis**:
+Tim's PhD thesis document ("Simulation of superparamagnetic particle trajectories in a microfluidic device for magnetic separation purposes," Dept. of Engineering Science, Oxford, 2018) — distinct from "Research Topic" (the on-site summary of the work) and "Publications" (the 3 journal papers). Not self-hosted: the source file is 140MB, far too large to serve from this site, so it links out to Oxford's own Research Archive (ORA) record instead.
+_Avoid_: Dissertation

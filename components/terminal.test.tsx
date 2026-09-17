@@ -1,7 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import { Terminal } from "./terminal";
+import { push } from "@/test/mocks/next-navigation";
+
+beforeEach(() => {
+  push.mockClear();
+});
 
 async function runCommand(command: string) {
   const user = userEvent.setup();
@@ -14,18 +19,41 @@ async function runCommand(command: string) {
 }
 
 describe("Terminal", () => {
-  it("responds to whoami with a fun identity blurb", async () => {
+  it("responds to whoami with a witty identity blurb", async () => {
     await runCommand("whoami");
-    expect(
-      screen.getByText(/quant developer and researcher/i),
-    ).toBeInTheDocument();
-    expect(screen.getByText(/PhD from Oxford/i)).toBeInTheDocument();
+    expect(screen.getByText(/Tim Grob/)).toBeInTheDocument();
+    expect(screen.getByText(/PhD, Oxford/)).toBeInTheDocument();
   });
 
-  it("responds to help by listing the available commands", async () => {
+  it("responds to help by listing the available commands, including navigation", async () => {
     await runCommand("help");
-    expect(screen.getByText(/whoami/i)).toBeInTheDocument();
-    expect(screen.getByText("Available commands: whoami, help")).toBeInTheDocument();
+    expect(
+      screen.getByText("Available commands: whoami, help, ls, cd <section>"),
+    ).toBeInTheDocument();
+  });
+
+  it("responds to ls by listing the navigable sections", async () => {
+    await runCommand("ls");
+    expect(
+      screen.getByText("experience research projects code contact"),
+    ).toBeInTheDocument();
+  });
+
+  it("navigates when cd is given a valid section", async () => {
+    await runCommand("cd research");
+    expect(push).toHaveBeenCalledWith("/research");
+    expect(screen.getByText("→ research")).toBeInTheDocument();
+  });
+
+  it("cd with no argument goes home", async () => {
+    await runCommand("cd");
+    expect(push).toHaveBeenCalledWith("/");
+  });
+
+  it("shows an error for cd to an unknown section, without navigating", async () => {
+    await runCommand("cd nowhere");
+    expect(screen.getByText(/no such section: nowhere/i)).toBeInTheDocument();
+    expect(push).not.toHaveBeenCalled();
   });
 
   it("shows a command-not-found message for an unrecognized command, without crashing", async () => {

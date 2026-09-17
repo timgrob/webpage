@@ -9,38 +9,30 @@ export type ExperienceEntry = {
 
 export const EXPERIENCE_ENTRIES: ExperienceEntry[] = [
   {
-    id: "xo-market",
-    role: "Freelance Senior Quantitative Researcher / Developer",
-    company: "XO Market",
-    location: "Remote",
-    period: "March 2026 – today",
-    achievements: [
-      "Designed and built a real-time terminal interface for monitoring and managing market-making activity on prediction markets, including live position tracking, order/quote management and risk alerts (Next.js)",
-      "Built a Golang market-making strategy for prediction markets without a reliable fair-value anchor, estimating true probabilities from order flow and using inventory-aware quoting to manage adverse selection and directional risk",
-      "Implemented a Golang market-making strategy quoting symmetric limit orders around the prevailing price, with each fill immediately hedged on Polymarket to stay risk-neutral",
-    ],
-  },
-  {
-    id: "dialectic",
-    role: "Senior Quantitative Researcher / Developer",
-    company: "Dialectic AG",
-    location: "Zug",
-    period: "Jan – Mar 2026",
-    achievements: [
-      "Built and productionized a funding rate forecasting system using ARIMA and XGBoost, incorporating time-series analysis, feature engineering, and model validation with Python (Scikit-learn, Darts)",
-      "Conducted statistical analysis of fund performance drivers, applying hypothesis testing, regression analysis, and quantitative modeling in Python to decompose and explain APR variability",
-      "Led the implementation of secure, containerized development environments for agent-based systems, building a sandboxed Docker infrastructure and establishing security best practices for safe code execution and reproducibility",
-    ],
-  },
-  {
     id: "digital-wave-finance",
     role: "Senior Quantitative Developer",
     company: "Digital Wave Finance AG",
     location: "Zug",
-    period: "Mar 2025 – Dec 2025",
+    period: "Mar 2025 – July 2026",
     achievements: [
       "Architected and implemented a low-latency data ingestion and aggregation backend for CeFi and DeFi market data using Python, enabling real-time data access for quantitative research and trading systems (FastAPI)",
       "Designed and optimized scalable data schemas, APIs, and data pipelines to support high-throughput analytics workflows, improving data accessibility and reliability for downstream quant research and modeling",
+      "Designed and built a real-time terminal interface for monitoring and managing market-making activity on prediction markets, including live position tracking, order/quote management and risk alerts (Golang)",
+      "Led the implementation of secure, containerized development environments for agent-based systems, building a sandboxed Docker infrastructure and establishing security best practices for safe code execution and reproducibility",
+      "Built and productionized a funding rate forecasting system using ARIMA and XGBoost, incorporating time-series analysis, feature engineering, and model validation with Python (Scikit-learn, Darts)",
+      "Conducted statistical analysis of fund performance drivers, applying hypothesis testing, regression analysis, and quantitative modeling in Python to decompose and explain APR variability",
+    ],
+  },
+  {
+    id: "crypton-holdings",
+    role: "Freelance Senior Quantitative Developer",
+    company: "Crypton Holdings",
+    location: "Cape Town",
+    period: "Oct 2024 – today",
+    achievements: [
+      "Developed and deployed automated trading systems based on technical analysis indicators for mid-frequency crypto markets, implementing robust, production-grade Python code, integrating algorithmic trading logic, technical indicators, and backtesting frameworks (Freqtrade)",
+      "Engineered a time-series forecasting pipeline for a price-directional LSTM forecasting model, focusing on data processing, model integration, and performance optimization with Python for real-time and batch inference (NumPy, Pandas, Darts, Scikit-learn)",
+      "Designed and maintained a scalable, containerized deployment infrastructure using Docker and Google Cloud Platform, enabling CI/CD workflows, automated model deployment, and high-availability trading systems",
     ],
   },
   {
@@ -100,25 +92,6 @@ export const EXPERIENCE_ENTRIES: ExperienceEntry[] = [
 
 export const EXPERIENCE_CONTENT = {
   summary:
-    "Quantitative developer and researcher with a PhD from the University of Oxford and an MSc from ETH Zürich, bringing over a decade of experience designing and deploying production-grade quantitative systems, spanning from high-frequency trading algorithms and low-latency GUIs/TUIs to large-scale ML pipelines and data infrastructure. Deep expertise across the full stack of quant development: research, implementation, testing, and deployment.",
+    "Quantitative developer and engineer with a PhD from the University of Oxford and an MSc from ETH Zürich, bringing over a decade of experience designing and deploying production-grade quantitative systems, spanning from high-frequency trading algorithms and low-latency GUIs/TUIs to large-scale ML pipelines and data infrastructure. Deep expertise across the full stack of quant development: research, implementation, testing, and deployment.",
   entries: EXPERIENCE_ENTRIES,
-  skills: [
-    "Python",
-    "MATLAB",
-    "JavaScript/Node.js",
-    "Rust (learning)",
-    "PyTorch",
-    "TensorFlow",
-    "Scikit-Learn",
-    "Darts",
-    "FastAPI",
-    "PySide/Qt",
-    "PySpark",
-    "Azure",
-    "AWS",
-    "Docker",
-    "Git",
-    "CI/CD",
-  ],
-  cvDownloadHref: "/tim-grob-cv.pdf",
 };

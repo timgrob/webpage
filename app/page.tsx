@@ -1,5 +1,6 @@
 import { HOME_CONTENT } from "@/lib/home-content";
 import { Terminal } from "@/components/terminal";
+import { Section } from "@/components/section";
 
 export default function Home() {
   return (
@@ -10,6 +11,15 @@ export default function Home() {
       </h1>
       <p className="mt-4 text-lg">{HOME_CONTENT.identity}</p>
       <p className="mt-4 max-w-xl text-muted">{HOME_CONTENT.tagline}</p>
+
+      <Section title="Skills" className="mt-8">
+        <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted">
+          {HOME_CONTENT.skills.map((skill) => (
+            <li key={skill}>{skill}</li>
+          ))}
+        </ul>
+      </Section>
+
       <p className="mt-8 max-w-xl text-sm text-muted">
         {HOME_CONTENT.interests}
       </p>
