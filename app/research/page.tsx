@@ -33,18 +33,22 @@ export default function ResearchPage() {
       </Section>
 
       <Section title="Publications">
-        <ul className="mt-3 flex flex-col gap-3 text-sm">
+        <ul className="mt-3 flex flex-col gap-4 text-sm">
           {RESEARCH_CONTENT.papers.map((paper) => (
             <li key={paper.doi}>
-              <a
-                href={paper.doi}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-accent hover:underline"
-              >
-                {paper.title}
-              </a>
-              <span className="text-muted"> ({paper.year})</span>
+              <p>
+                <a
+                  href={paper.doi}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent hover:underline"
+                >
+                  {paper.title}
+                </a>
+              </p>
+              <p className="mt-1 text-muted">
+                {paper.journal}, {paper.year}
+              </p>
             </li>
           ))}
         </ul>

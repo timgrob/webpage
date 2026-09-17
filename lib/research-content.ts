@@ -1,5 +1,6 @@
 export type ResearchPaper = {
   title: string;
+  journal: string;
   year: number;
   doi: string;
 };
@@ -7,17 +8,20 @@ export type ResearchPaper = {
 export const RESEARCH_PAPERS: ResearchPaper[] = [
   {
     title: "Magnetophoretic velocities of superparamagnetic particles, agglomerates and complexes",
+    journal: "Journal of Magnetism and Magnetic Materials",
     year: 2015,
     doi: "https://doi.org/10.1016/j.jmmm.2015.02.031",
   },
   {
     title:
       "Comparison between simulation and experimentally observed interactions between two magnetic beads in a fluidic system",
+    journal: "Journal of Magnetism and Magnetic Materials",
     year: 2016,
     doi: "https://doi.org/10.1016/j.jmmm.2016.01.043",
   },
   {
     title: "Magnetic susceptibility characterisation of superparamagnetic microspheres",
+    journal: "Journal of Magnetism and Magnetic Materials",
     year: 2017,
     doi: "https://doi.org/10.1016/j.jmmm.2017.12.007",
   },

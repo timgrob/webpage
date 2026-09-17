@@ -30,6 +30,15 @@ describe("Research page", () => {
     }
   });
 
+  it("renders each paper's journal and year on their own line, matching the Thesis style", () => {
+    render(<ResearchPage />);
+    for (const paper of RESEARCH_CONTENT.papers) {
+      expect(
+        screen.getByText(`${paper.journal}, ${paper.year}`),
+      ).toBeInTheDocument();
+    }
+  });
+
   it("never renders Tim's home address, phone number, or personal email", () => {
     const { container } = render(<ResearchPage />);
     const text = container.textContent ?? "";
