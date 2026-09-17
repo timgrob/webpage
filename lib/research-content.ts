@@ -23,6 +23,16 @@ export const RESEARCH_PAPERS: ResearchPaper[] = [
   },
 ];
 
+export const THESIS = {
+  title:
+    "Simulation of superparamagnetic particle trajectories in a microfluidic device for magnetic separation purposes",
+  institution: "University of Oxford, Department of Engineering Science",
+  year: 2018,
+  // Not self-hosted: the source PDF is 140MB, far too large to serve from this
+  // site. Links to Oxford's own Research Archive record instead.
+  href: "https://ora.ox.ac.uk/objects/uuid:759130c0-29ca-4287-9849-15b844277cc7",
+};
+
 export const RESEARCH_CONTENT = {
   title: "Numerical Particle Trajectory Simulation",
   institution: "University of Oxford",
@@ -33,5 +43,6 @@ export const RESEARCH_CONTENT = {
     "Predicting a bead's trajectory accurately is hard: its motion combines a deterministic magnetic pull with random thermal jostling (Brownian motion), and beads can clump into agglomerates that move differently from single beads. Tim built Monte Carlo simulations — models that repeatedly sample random outcomes to build up a statistical picture of behaviour — to predict how individual and clustered beads travel, then validated the simulations against physical experiments measuring bead velocities and bead-to-bead interactions in real fluidic systems.",
   outcome:
     "The work produced three peer-reviewed papers and was presented at two international conferences.",
+  thesis: THESIS,
   papers: RESEARCH_PAPERS,
 };

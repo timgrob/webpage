@@ -11,6 +11,17 @@ describe("Research page", () => {
     expect(screen.getByText(RESEARCH_CONTENT.outcome)).toBeInTheDocument();
   });
 
+  it("links the thesis to Oxford's Research Archive, appearing before Publications", () => {
+    render(<ResearchPage />);
+    const thesisLink = screen.getByRole("link", {
+      name: RESEARCH_CONTENT.thesis.title,
+    });
+    expect(thesisLink).toHaveAttribute("href", RESEARCH_CONTENT.thesis.href);
+
+    const headings = screen.getAllByRole("heading", { level: 2 }).map((h) => h.textContent);
+    expect(headings.indexOf("Thesis")).toBeLessThan(headings.indexOf("Publications"));
+  });
+
   it("links all three papers by DOI", () => {
     render(<ResearchPage />);
     for (const paper of RESEARCH_CONTENT.papers) {

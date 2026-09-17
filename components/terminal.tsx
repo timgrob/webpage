@@ -1,16 +1,21 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import { HOME_HREF, NAV_LINKS } from "@/lib/site-content";
 
 const INTRO_TEXT =
-  "Hi, I'm Tim — quant dev by day, PhD physicist and Arduino tinkerer always. Type `help` to see what this thing does.";
+  "Hi, I'm Tim — quant dev by day, engineer and tinkerer always. Type `help` to see what this thing does.";
 
 const TYPE_INTERVAL_MS = 15;
 
-const HELP_TEXT = "Available commands: whoami, help";
+const HELP_TEXT = "Available commands: whoami, help, ls, cd <section>";
 
 const WHOAMI_TEXT =
-  "Tim Grob — quant developer and researcher with a PhD from Oxford. By day: pricing risk and building trading systems. By night: wiring up Arduinos until something blinks the way it's supposed to.";
+  "Tim Grob — proof that a mechanical engineer can be talked into building trading systems. PhD, Oxford; day job: pricing risk; night job: convincing an Arduino to blink on command. Occasionally outruns his own code at 800m pace.";
+
+// Sections reachable via `cd`, in the order `ls` lists them. Excludes "home" itself, same as `ls` on a real filesystem not listing the current directory.
+const SECTIONS = NAV_LINKS.filter((link) => link.href !== HOME_HREF);
 
 type HistoryEntry = {
   id: number;
@@ -18,20 +23,39 @@ type HistoryEntry = {
   response: string;
 };
 
-/** Runs a terminal command and returns its response text. Unknown commands get a "not found" reply rather than throwing. */
-function runCommand(rawInput: string): string {
-  const command = rawInput.trim().toLowerCase();
+type CommandResult = {
+  response: string;
+  navigateTo?: string;
+};
+
+/** Runs a terminal command and returns its response, plus an optional route to navigate to. Unknown commands get a "not found" reply rather than throwing. */
+function runCommand(rawInput: string): CommandResult {
+  const trimmed = rawInput.trim();
+  const command = trimmed.toLowerCase();
 
   if (command === "whoami") {
-    return WHOAMI_TEXT;
+    return { response: WHOAMI_TEXT };
   }
   if (command === "help") {
-    return HELP_TEXT;
+    return { response: HELP_TEXT };
   }
-  return `command not found: ${rawInput}`;
+  if (command === "ls") {
+    return { response: SECTIONS.map((section) => section.label).join(" ") };
+  }
+  const [word, ...rest] = trimmed.split(/\s+/);
+  if (word.toLowerCase() === "cd") {
+    const target = (rest.join(" ") || "home").toLowerCase();
+    const destination = NAV_LINKS.find((link) => link.label === target);
+    if (destination) {
+      return { response: `→ ${destination.label}`, navigateTo: destination.href };
+    }
+    return { response: `cd: no such section: ${target}` };
+  }
+  return { response: `command not found: ${rawInput}` };
 }
 
 export function Terminal() {
+  const router = useRouter();
   const [typedIntro, setTypedIntro] = useState("");
   const [input, setInput] = useState("");
   const [history, setHistory] = useState<HistoryEntry[]>([]);
@@ -63,13 +87,18 @@ export function Terminal() {
     const command = input.trim();
     if (!command) return;
 
+    const result = runCommand(command);
     const entry: HistoryEntry = {
       id: nextId.current++,
       command,
-      response: runCommand(command),
+      response: result.response,
     };
     setHistory((previous) => [...previous, entry]);
     setInput("");
+
+    if (result.navigateTo) {
+      router.push(result.navigateTo);
+    }
   }
 
   return (

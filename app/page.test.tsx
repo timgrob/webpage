@@ -1,7 +1,11 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import Home from "./page";
 import { HOME_CONTENT } from "@/lib/home-content";
+
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ push: vi.fn() }),
+}));
 
 describe("Home page", () => {
   it("renders the headline identity", () => {
@@ -34,5 +38,12 @@ describe("Home page", () => {
     expect(
       screen.getByRole("textbox", { name: /terminal command/i }),
     ).toBeInTheDocument();
+  });
+
+  it("renders the Skills list (moved here from the Experience page)", () => {
+    render(<Home />);
+    for (const skill of HOME_CONTENT.skills) {
+      expect(screen.getByText(skill)).toBeInTheDocument();
+    }
   });
 });

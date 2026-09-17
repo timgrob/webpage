@@ -28,10 +28,16 @@ describe("Experience page", () => {
     expect(screen.getByText(EXPERIENCE_CONTENT.summary)).toBeInTheDocument();
   });
 
-  it("renders a CV download link pointing at the redacted public PDF", () => {
+  it("does not offer a CV download — the download button was removed", () => {
     render(<ExperiencePage />);
-    const downloadLink = screen.getByRole("link", { name: /download.*cv/i });
-    expect(downloadLink).toHaveAttribute("href", "/tim-grob-cv.pdf");
+    expect(
+      screen.queryByRole("link", { name: /download.*cv/i }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("does not render a Skills list — that moved to the Home page", () => {
+    render(<ExperiencePage />);
+    expect(screen.queryByText("Skills")).not.toBeInTheDocument();
   });
 
   it("never renders Tim's home address, phone number, or personal email", () => {

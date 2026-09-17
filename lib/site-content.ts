@@ -3,8 +3,10 @@ export type SiteLink = {
   label: string;
 };
 
+export const HOME_HREF = "/";
+
 export const NAV_LINKS: SiteLink[] = [
-  { href: "/", label: "home" },
+  { href: HOME_HREF, label: "home" },
   { href: "/experience", label: "experience" },
   { href: "/research", label: "research" },
   { href: "/projects", label: "projects" },
